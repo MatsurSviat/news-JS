@@ -27,3 +27,5 @@ export interface RootObjectSource {
 export interface RootObjectArticle {
     articles: IArticle[];
 }
+
+export interface Ioptions {}
