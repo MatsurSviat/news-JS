@@ -15,7 +15,7 @@ export class AppView {
         this.news.draw(values);
     }
 
-    drawSources(data: Readonly<RootObjectSource>): void {
+    drawSources(data: Readonly<RootObjectSource>) {
         const values = data?.sources ? data?.sources : [];
         this.sources.draw(values);
     }

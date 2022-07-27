@@ -1,16 +1,16 @@
-import { ISource, Ioptions } from '../../types/index';
+import { ISource, Ioptions, RootObjectSource, RootObjectArticle, Callback } from '../../types/index';
 
 class Loader {
     baseLink: string;
-    options: { apiKey?: string | undefined; };
-    constructor(baseLink: string, options: {apiKey?: string}) {
+    options: { apiKey?: string | undefined };
+    constructor(baseLink: string, options: { apiKey?: string }) {
         this.baseLink = baseLink;
         this.options = options;
     }
 
     getResp(
         { endpoint, options = {} }: { endpoint: string; options?: Ioptions },
-        callback = (): void => {
+        callback = () => {
             console.error('No callback for GET response');
         }
     ) {
@@ -29,7 +29,7 @@ class Loader {
     }
 
     makeUrl(options: Ioptions, endpoint: string) {
-        const urlOptions: { [index: string]: string } = { ...this.options, ...options };;
+        const urlOptions: { [index: string]: string } = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
         Object.keys(urlOptions).forEach((key) => {
@@ -39,7 +39,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: string, callback: (data: string) => void, options = {}) {
+    load<T>(method: string, endpoint: string, callback: Callback<T>, options = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())

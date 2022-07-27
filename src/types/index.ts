@@ -29,3 +29,5 @@ export interface RootObjectArticle {
 }
 
 export interface Ioptions {}
+
+export type Callback<T> = (data?: T) => void;
