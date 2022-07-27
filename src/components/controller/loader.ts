@@ -2,8 +2,8 @@ import { ISource, Ioptions } from '../../types/index';
 
 class Loader {
     baseLink: string;
-    options: ISource;
-    constructor(baseLink: string, options: ISource) {
+    options: { apiKey?: string | undefined; };
+    constructor(baseLink: string, options: {apiKey?: string}) {
         this.baseLink = baseLink;
         this.options = options;
     }
